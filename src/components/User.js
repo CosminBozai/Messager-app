@@ -5,17 +5,19 @@ export default function User() {
 
   useEffect(() => {
     async function fetchUserData() {
-      let response = await fetch("https://dummyjson.com/users/1");
-      let { firstName, image } = await response.json();
-      setUserData({ firstName, image });
+      const response = await fetch("https://dummyjson.com/users/1");
+      const json = await response.json();
+      const username = json.firstName;
+      const icon = json.image;
+      setUserData({ username, icon });
     }
     fetchUserData();
   }, []);
 
   return (
     <div>
-      <p>{userData.firstName}</p>
-      {<img src={userData.image} className="user-icon" alt="#"></img>}
+      <p>{userData.username}</p>
+      <img src={userData.icon} className="user-icon" alt="#"></img>
     </div>
   );
 }

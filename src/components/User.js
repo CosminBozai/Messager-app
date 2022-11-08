@@ -15,9 +15,12 @@ export default function User() {
   }, []);
 
   return (
-    <div>
+    <>
+      {" "}
       <p>{userData.username}</p>
-      <img src={userData.icon} className="user-icon" alt="#"></img>
-    </div>
+      <div className="user-icon">
+        <img src={userData.icon} alt="#"></img>
+      </div>
+    </>
   );
 }

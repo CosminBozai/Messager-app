@@ -1,4 +1,5 @@
-import User from "../components/User";
+import User from "../../components/User";
+import "./Header.css";
 
 export default function Header({ logStatus }) {
   if (logStatus) {

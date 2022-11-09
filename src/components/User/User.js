@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./User.css";
 
 export default function User() {
   const [userData, setUserData] = useState({});
@@ -18,7 +19,7 @@ export default function User() {
     <>
       {" "}
       <p>{userData.username}</p>
-      <div className="user-icon">
+      <div data-testid="profile-icon" className="user-icon">
         <img src={userData.icon} alt="#"></img>
       </div>
     </>

@@ -8,16 +8,3 @@
   font-size: 1.2rem;
   letter-spacing: 1px;
 }
-
-.user-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: white;
-}
-
-.user-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}

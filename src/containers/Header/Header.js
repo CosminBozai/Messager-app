@@ -1,7 +1,8 @@
-import User from "../../components/User";
+import User from "../../components/User/User";
+import LogInButton from "../../components/LogInButton/LogInButton";
 import "./Header.css";
 
-export default function Header({ logStatus }) {
+export default function Header({ logStatus, setLogStatus }) {
   if (logStatus) {
     return (
       <div id="header">
@@ -9,6 +10,12 @@ export default function Header({ logStatus }) {
       </div>
     );
   } else {
-    return <div id="header">Not logged in</div>;
+    return (
+      <div id="header">
+        {" "}
+        You are not logged in{" "}
+        <LogInButton logStatus={logStatus} setLogStatus={setLogStatus} />
+      </div>
+    );
   }
 }

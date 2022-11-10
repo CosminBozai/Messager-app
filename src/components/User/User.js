@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { auth, db, doc, getDoc } from "../../firebase";
 import "./User.css";
 
 export default function User() {
+  // State that contains the info about the current logged user
   const [userData, setUserData] = useState({});
-
+  const user = auth.currentUser;
+  // Get the user data from the database when the component mounts
   useEffect(() => {
     async function fetchUserData() {
-      const response = await fetch("https://dummyjson.com/users/1");
-      const json = await response.json();
-      const username = json.firstName;
-      const icon = json.image;
-      setUserData({ username, icon });
+      const docRef = doc(db, "Users", user.email);
+      const docSnap = await getDoc(docRef);
+      const username = docSnap.data().username;
+      setUserData({ username });
     }
     fetchUserData();
   }, []);
@@ -20,7 +22,7 @@ export default function User() {
       {" "}
       <p>{userData.username}</p>
       <div data-testid="profile-icon" className="user-icon">
-        <img src={userData.icon} alt="#"></img>
+        <img src="../../images/default.jpg" alt="#"></img>
       </div>
     </>
   );

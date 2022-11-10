@@ -6,15 +6,14 @@ import ChatContainer from "./containers/ChatContainer";
 import { auth, onAuthStateChanged } from "./firebase";
 
 function App() {
+  // logStatus is passed as a prop to the components to condiotionally render things
   const [logStatus, setLogStatus] = useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setLogStatus(true);
-        console.log("da");
       } else {
         setLogStatus(false);
-        console.log("nu");
       }
     });
   });

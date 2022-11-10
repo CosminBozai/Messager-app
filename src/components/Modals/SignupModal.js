@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useState } from "react";
 import {
   db,
@@ -21,8 +20,8 @@ export default function SignupModal({ setShowSignup }) {
       password
     );
     // Add a new document in collection "Users"
-    await setDoc(doc(db, "Users", username), {
-      name: username,
+    await setDoc(doc(db, "Users", email), {
+      username,
       email: userCred.user.email,
     });
   }
@@ -70,6 +69,14 @@ export default function SignupModal({ setShowSignup }) {
           onClick={createUser}
         >
           Create account
+        </button>
+        <button
+          type="button"
+          className="form-btn cancel-btn"
+          data-testid="modal-cancel-btn"
+          onClick={() => setShowSignup(false)}
+        >
+          Cancel
         </button>
       </form>
     </div>

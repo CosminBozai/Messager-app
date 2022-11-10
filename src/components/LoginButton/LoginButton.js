@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import LoginModal from "../Modals/LoginModal";
 
-export default function LoginButton({ logStatus, setLogStatus }) {
+export default function LoginButton() {
+  // Display the login form based on the state
   const [showLogin, setShowLogin] = useState(false);
   return (
     <>

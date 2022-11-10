@@ -5,6 +5,7 @@ import {
   doc,
   addDoc,
   setDoc,
+  getDoc,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -13,6 +14,7 @@ import {
   onAuthStateChanged,
   signOut,
 } from "firebase/auth";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyDPNXff-fw9QklJjOOm0uJyC2Wt9Ol-iZU",
@@ -27,6 +29,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 export {
   db,
@@ -34,9 +37,13 @@ export {
   doc,
   addDoc,
   setDoc,
+  getDoc,
   auth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  storage,
+  ref,
+  uploadBytes,
 };

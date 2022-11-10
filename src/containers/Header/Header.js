@@ -3,7 +3,7 @@ import LoginButton from "../../components/LoginButton/LoginButton";
 import { auth, signOut } from "../../firebase";
 import "./Header.css";
 
-export default function Header({ logStatus, setLogStatus }) {
+export default function Header({ logStatus }) {
   if (logStatus) {
     return (
       <>
@@ -23,8 +23,7 @@ export default function Header({ logStatus, setLogStatus }) {
     return (
       <div id="header">
         {" "}
-        You are not logged in{" "}
-        <LoginButton logStatus={logStatus} setLogStatus={setLogStatus} />
+        You are not logged in <LoginButton />
       </div>
     );
   }

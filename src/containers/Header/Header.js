@@ -1,13 +1,23 @@
 import User from "../../components/User/User";
 import LoginButton from "../../components/LoginButton/LoginButton";
+import { auth, signOut } from "../../firebase";
 import "./Header.css";
 
 export default function Header({ logStatus, setLogStatus }) {
   if (logStatus) {
     return (
-      <div id="header">
-        <User />
-      </div>
+      <>
+        <div id="header">
+          <button
+            onClick={async () => {
+              await signOut(auth);
+            }}
+          >
+            Sign out
+          </button>
+          <User />
+        </div>
+      </>
     );
   } else {
     return (

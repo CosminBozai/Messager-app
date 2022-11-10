@@ -15,23 +15,11 @@ describe("Header", () => {
     let loginBtn = screen.getByRole("button", { name: "Log in" });
     expect(loginBtn).toBeInTheDocument();
   });
-  it("Should display username  if the prop is true", async () => {
-    render(<Header logStatus={true} />);
-    let username = await screen.findByText(/Terry/i);
-    expect(username).toBeInTheDocument();
-  });
-  it("Should display icon if the prop is true", async () => {
-    render(<Header logStatus={true} />);
-    let icon = await screen.findByTestId("profile-icon");
-    expect(icon).toBeInTheDocument();
-  });
-  it("clicking the log in button should display the username and icon", async () => {
+  it("clicking the log in button should render the Login modal", () => {
     render(<MockApp />);
     let loginBtn = screen.getByRole("button", { name: "Log in" });
     fireEvent.click(loginBtn);
-    let username = await screen.findByText(/Terry/i);
-    let icon = await screen.findByTestId("profile-icon");
-    expect(username).toBeInTheDocument();
-    expect(icon).toBeInTheDocument();
+    let modalLoginBtn = screen.getByTestId("modal-login-btn");
+    expect(modalLoginBtn).toBeInTheDocument();
   });
 });

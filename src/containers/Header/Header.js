@@ -1,5 +1,5 @@
 import User from "../../components/User/User";
-import LogInButton from "../../components/LogInButton/LogInButton";
+import LoginButton from "../../components/LoginButton/LoginButton";
 import "./Header.css";
 
 export default function Header({ logStatus, setLogStatus }) {
@@ -14,7 +14,7 @@ export default function Header({ logStatus, setLogStatus }) {
       <div id="header">
         {" "}
         You are not logged in{" "}
-        <LogInButton logStatus={logStatus} setLogStatus={setLogStatus} />
+        <LoginButton logStatus={logStatus} setLogStatus={setLogStatus} />
       </div>
     );
   }

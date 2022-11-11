@@ -13,8 +13,13 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-form {
+#login-form {
   padding: 1rem;
+  background-color: white;
+}
+
+#signup-form {
+  padding: 2rem;
   background-color: white;
 }
 
@@ -30,7 +35,8 @@ label {
 }
 
 .login-btn,
-.create-acc-btn {
+.create-acc-btn,
+.cancel-btn {
   white-space: nowrap;
   margin: 0 50%;
   transform: translateX(-50%);

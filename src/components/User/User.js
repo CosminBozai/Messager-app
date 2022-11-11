@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { firestore, doc, getDoc } from "../../firebase/firestore";
 import { auth } from "../../firebase/auth";
+import { storage, ref, getDownloadURL } from "../../firebase/storage";
 import "./User.css";
 
 export default function User() {
@@ -12,7 +13,8 @@ export default function User() {
     async function fetchUserData() {
       const docSnap = await getDoc(doc(firestore, "Users", user.email));
       const username = docSnap.data().username;
-      setUserData({ username });
+      const iconURL = await getDownloadURL(ref(storage, "default.jpg"));
+      setUserData({ username, iconURL });
     }
     fetchUserData();
   }, []);
@@ -22,7 +24,7 @@ export default function User() {
       {" "}
       <p className="username">{userData.username}</p>
       <div data-testid="profile-icon" className="user-icon">
-        <img src="../../images/default.jpg" alt="#"></img>
+        <img src={userData.iconURL} alt="#"></img>
       </div>
     </>
   );

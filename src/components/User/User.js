@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { auth, db, doc, getDoc } from "../../firebase";
+import { firestore, doc, getDoc } from "../../firebase/firestore";
+import { auth } from "../../firebase/auth";
 import "./User.css";
 
 export default function User() {
@@ -9,8 +10,7 @@ export default function User() {
   // Get the user data from the database when the component mounts
   useEffect(() => {
     async function fetchUserData() {
-      const docRef = doc(db, "Users", user.email);
-      const docSnap = await getDoc(docRef);
+      const docSnap = await getDoc(doc(firestore, "Users", user.email));
       const username = docSnap.data().username;
       setUserData({ username });
     }
@@ -20,7 +20,7 @@ export default function User() {
   return (
     <>
       {" "}
-      <p>{userData.username}</p>
+      <p className="username">{userData.username}</p>
       <div data-testid="profile-icon" className="user-icon">
         <img src="../../images/default.jpg" alt="#"></img>
       </div>

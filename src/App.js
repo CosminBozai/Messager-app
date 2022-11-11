@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./containers/Header/Header";
 import FriendList from "./containers/FriendList";
 import ChatContainer from "./containers/ChatContainer";
-import { auth, onAuthStateChanged } from "./firebase";
+import { auth, onAuthStateChanged } from "./firebase/auth";
 
 function App() {
   // logStatus is passed as a prop to the components to condiotionally render things

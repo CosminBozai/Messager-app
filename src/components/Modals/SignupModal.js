@@ -1,11 +1,6 @@
 import { useState } from "react";
-import {
-  db,
-  doc,
-  setDoc,
-  auth,
-  createUserWithEmailAndPassword,
-} from "../../firebase";
+import { firestore, doc, setDoc } from "../../firebase/firestore";
+import { auth, createUserWithEmailAndPassword } from "../../firebase/auth";
 
 export default function SignupModal({ setShowSignup }) {
   const [email, setEmail] = useState("");
@@ -20,7 +15,7 @@ export default function SignupModal({ setShowSignup }) {
       password
     );
     // Add a new document in collection "Users"
-    await setDoc(doc(db, "Users", email), {
+    await setDoc(doc(firestore, "Users", email), {
       username,
       email: userCred.user.email,
     });

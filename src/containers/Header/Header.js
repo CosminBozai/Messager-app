@@ -1,6 +1,6 @@
 import User from "../../components/User/User";
 import LoginButton from "../../components/LoginButton/LoginButton";
-import { auth, signOut } from "../../firebase";
+import { auth, signOut } from "../../firebase/auth";
 import "./Header.css";
 
 export default function Header({ logStatus }) {

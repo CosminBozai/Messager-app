@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SignupModal from "./SignupModal";
-import { auth, signInWithEmailAndPassword } from "../../firebase";
+import { auth, signInWithEmailAndPassword } from "../../firebase/auth";
 import "./Modal.css";
 
 export default function LoginModal() {

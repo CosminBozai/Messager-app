@@ -1,9 +1,12 @@
 import User from "../../components/User/User";
-import LoginButton from "../../components/LoginButton/LoginButton";
+import LoginModal from "../../components/Modals/LoginModal";
 import { auth, signOut } from "../../firebase/auth";
+import { useState } from "react";
 import "./Header.css";
 
 export default function Header({ logStatus }) {
+  // Display the login modal based on the state
+  const [showLogin, setShowLogin] = useState(false);
   if (logStatus) {
     return (
       <>
@@ -23,7 +26,9 @@ export default function Header({ logStatus }) {
     return (
       <div id="header">
         {" "}
-        You are not logged in <LoginButton />
+        <p>You are not logged in</p>
+        <button onClick={() => setShowLogin(true)}>Log in</button>
+        {showLogin && <LoginModal setShowLogin={setShowLogin} />}
       </div>
     );
   }

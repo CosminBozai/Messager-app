@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { auth } from "../../firebase/auth";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { storage, ref, uploadBytes } from "../../firebase/storage";
 
 export default function IconModal({
   setShowIconModal,
   setIconChanged,
-  iconChanged,
+  fetchUserData,
 }) {
   const currentIcon = document
     .querySelector("#profile-icon")
@@ -29,8 +29,10 @@ export default function IconModal({
   function uploadImage() {
     const storageRef = ref(storage, `${user.uid}/icon`);
     uploadBytes(storageRef, icon).then(() => {
+      setIconChanged(true);
       setShowIconModal(false);
-      setIconChanged(!iconChanged);
+      // Make a call for the updated user data
+      fetchUserData();
     });
   }
   return (

@@ -33,7 +33,7 @@ export default function User() {
           alt="#"
         ></img>
       </div>
-      {showIconModal && <IconModal />}
+      {showIconModal && <IconModal setShowIconModal={setShowIconModal} />}
     </>
   );
 }

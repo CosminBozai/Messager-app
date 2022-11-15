@@ -4,7 +4,7 @@ import { auth } from "../../firebase/auth";
 import { useEffect, useRef } from "react";
 import { storage, ref, uploadBytes } from "../../firebase/storage";
 
-export default function IconModal() {
+export default function IconModal({ setShowIconModal }) {
   const currentIcon = document
     .querySelector("#profile-icon")
     .getAttribute("src");
@@ -24,7 +24,7 @@ export default function IconModal() {
   // Upload the image to the storage belonging to the current user
   function uploadImage() {
     const storageRef = ref(storage, `${user.uid}/icon`);
-    uploadBytes(storageRef, icon);
+    uploadBytes(storageRef, icon).then(() => setShowIconModal(false));
   }
   return (
     <div className="modal icon">

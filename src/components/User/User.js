@@ -9,17 +9,18 @@ export default function User() {
   // State that contains the info about the current logged user
   const [userData, setUserData] = useState({});
   const [showIconModal, setShowIconModal] = useState(false);
+  const [iconChanged, setIconChanged] = useState(false);
   const user = auth.currentUser;
   // Get the user data from the database when the component mounts
   useEffect(() => {
     async function fetchUserData() {
       const docSnap = await getDoc(doc(firestore, "Users", user.uid));
       const username = docSnap.data().username;
-      const iconURL = await getDownloadURL(ref(storage, "default.jpg"));
+      const iconURL = await getDownloadURL(ref(storage, `${user.uid}/icon`));
       setUserData({ username, iconURL });
     }
     fetchUserData();
-  }, []);
+  }, [iconChanged]);
 
   return (
     <>
@@ -33,7 +34,13 @@ export default function User() {
           alt="#"
         ></img>
       </div>
-      {showIconModal && <IconModal setShowIconModal={setShowIconModal} />}
+      {showIconModal && (
+        <IconModal
+          setShowIconModal={setShowIconModal}
+          iconChanged={iconChanged}
+          setIconChanged={setIconChanged}
+        />
+      )}
     </>
   );
 }

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { firestore, doc, setDoc } from "../../firebase/firestore";
 import { auth, createUserWithEmailAndPassword } from "../../firebase/auth";
 
-export default function SignupModal({ setShowSignup, setShowLogin }) {
+export default function SignupModal({ setShowSignup }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -71,7 +71,6 @@ export default function SignupModal({ setShowSignup, setShowLogin }) {
           data-testid="modal-cancel-btn"
           onClick={() => {
             setShowSignup(false);
-            setShowLogin(false);
           }}
         >
           Cancel

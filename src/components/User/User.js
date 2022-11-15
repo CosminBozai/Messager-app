@@ -12,15 +12,23 @@ export default function User() {
   const [iconChanged, setIconChanged] = useState(false);
   const user = auth.currentUser;
   // Get the user data from the database when the component mounts
-  useEffect(() => {
-    async function fetchUserData() {
-      const docSnap = await getDoc(doc(firestore, "Users", user.uid));
-      const username = docSnap.data().username;
-      const iconURL = await getDownloadURL(ref(storage, `${user.uid}/icon`));
-      setUserData({ username, iconURL });
+  async function fetchUserData() {
+    const docSnap = await getDoc(doc(firestore, "Users", user.uid));
+    const username = docSnap.data().username;
+    let iconURL;
+    // User has a custom icon
+    if (iconChanged) {
+      iconURL = await getDownloadURL(ref(storage, `${user.uid}/icon`));
+      // User has the default icon
+    } else {
+      iconURL = await getDownloadURL(ref(storage, `default.jpg`));
     }
+
+    setUserData({ username, iconURL });
+  }
+  useEffect(() => {
     fetchUserData();
-  }, [iconChanged]);
+  });
 
   return (
     <>
@@ -37,7 +45,7 @@ export default function User() {
       {showIconModal && (
         <IconModal
           setShowIconModal={setShowIconModal}
-          iconChanged={iconChanged}
+          fetchUserData={fetchUserData}
           setIconChanged={setIconChanged}
         />
       )}

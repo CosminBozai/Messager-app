@@ -50,6 +50,7 @@ export default function IconModal({
           ref={inputFile}
           style={{ display: "none" }}
         />
+        <button onClick={() => setShowIconModal(false)}>Cancel</button>
       </div>
     </div>
   );

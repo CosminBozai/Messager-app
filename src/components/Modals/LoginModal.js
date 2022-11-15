@@ -3,12 +3,13 @@ import SignupModal from "./SignupModal";
 import { auth, signInWithEmailAndPassword } from "../../firebase/auth";
 import "./Modal.css";
 
-export default function LoginModal() {
+export default function LoginModal({ setShowLogin }) {
   const [showSignup, setShowSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   async function loginUser() {
     await signInWithEmailAndPassword(auth, email, password);
+    setShowLogin(false);
   }
   return (
     <>

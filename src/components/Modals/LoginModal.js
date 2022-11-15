@@ -57,7 +57,12 @@ export default function LoginModal({ setShowLogin }) {
           </div>
         </form>
       </div>
-      {showSignup && <SignupModal setShowSignup={setShowSignup} />}
+      {showSignup && (
+        <SignupModal
+          setShowSignup={setShowSignup}
+          setShowLogin={setShowLogin}
+        />
+      )}
     </>
   );
 }

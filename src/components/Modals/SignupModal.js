@@ -2,7 +2,7 @@ import { useState } from "react";
 import { firestore, doc, setDoc } from "../../firebase/firestore";
 import { auth, createUserWithEmailAndPassword } from "../../firebase/auth";
 
-export default function SignupModal({ setShowSignup }) {
+export default function SignupModal({ setShowSignup, setShowLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -15,7 +15,7 @@ export default function SignupModal({ setShowSignup }) {
       password
     );
     // Add a new document in collection "Users"
-    await setDoc(doc(firestore, "Users", email), {
+    await setDoc(doc(firestore, "Users", userCred.user.uid), {
       username,
       email: userCred.user.email,
     });
@@ -69,7 +69,10 @@ export default function SignupModal({ setShowSignup }) {
           type="button"
           className="form-btn cancel-btn"
           data-testid="modal-cancel-btn"
-          onClick={() => setShowSignup(false)}
+          onClick={() => {
+            setShowSignup(false);
+            setShowLogin(false);
+          }}
         >
           Cancel
         </button>

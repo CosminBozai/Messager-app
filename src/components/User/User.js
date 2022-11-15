@@ -11,7 +11,7 @@ export default function User() {
   // Get the user data from the database when the component mounts
   useEffect(() => {
     async function fetchUserData() {
-      const docSnap = await getDoc(doc(firestore, "Users", user.email));
+      const docSnap = await getDoc(doc(firestore, "Users", user.uid));
       const username = docSnap.data().username;
       const iconURL = await getDownloadURL(ref(storage, "default.jpg"));
       setUserData({ username, iconURL });

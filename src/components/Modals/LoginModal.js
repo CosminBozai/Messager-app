@@ -1,47 +1,83 @@
 import React, { useState } from "react";
 import SignupModal from "./SignupModal";
 import { auth, signInWithEmailAndPassword } from "../../firebase/auth";
+import { useFormik } from "formik";
 import "./Modal.css";
+import { findAllByAltText } from "@testing-library/react";
+
+// Custom validation
+const validate = (values) => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = "This field is reuqired";
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = "Invalid email address";
+  }
+
+  if (!values.password) {
+    errors.password = "This field is reuqired";
+  } else if (values.password.length <= 5) {
+    errors.password = "Password too short";
+  }
+  return errors;
+};
 
 export default function LoginModal({ setShowLogin }) {
   const [showSignup, setShowSignup] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  async function loginUser() {
-    await signInWithEmailAndPassword(auth, email, password);
-    setShowLogin(false);
-  }
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validate,
+    onSubmit: (values) => {
+      signInWithEmailAndPassword(auth, values.email, values.password)
+        .then(() => {
+          setShowLogin(false);
+        })
+        .catch((err) => {
+          if ((err.code = "auth/user-not-found"))
+            alert("User not found. Try signing up");
+        });
+    },
+  });
   return (
     <>
       <div className="modal login">
-        <form id="login-form">
+        <form onSubmit={formik.handleSubmit} id="login-form">
           <div className="input-field">
-            <label htmlFor="login-email">Email address</label>
+            <label htmlFor="email">Email address</label>
             <input
               type="email"
-              id="login-email"
-              required=""
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
+              id="email"
+              name="email"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.email}
             />
+            {formik.errors.email && formik.touched.email ? (
+              <div className="error">{formik.errors.email}</div>
+            ) : null}
           </div>
           <div className="input-field">
-            <label htmlFor="login-password">Your password</label>
+            <label htmlFor="password">Your password</label>
             <input
               type="password"
-              id="login-password"
-              required=""
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              id="password"
+              name="password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
             />
+            {formik.errors.password && formik.touched.password ? (
+              <div className="error">{formik.errors.password}</div>
+            ) : null}
           </div>
           <button
-            type="button"
+            type="submit"
             className="form-btn login-btn"
             data-testid="modal-login-btn"
-            onClick={loginUser}
           >
             Log in
           </button>

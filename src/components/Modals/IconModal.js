@@ -3,6 +3,7 @@ import { useState } from "react";
 import { auth } from "../../firebase/auth";
 import { useRef } from "react";
 import { storage, ref, uploadBytes } from "../../firebase/storage";
+import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 
 export default function IconModal({ setShowIconModal, fetchUserData }) {
   const currentIcon = document
@@ -25,10 +26,14 @@ export default function IconModal({ setShowIconModal, fetchUserData }) {
   function uploadImage() {
     if (icon === null || icon === undefined) return;
     const storageRef = ref(storage, `${user.uid}/icon`);
+    // Disable the buttons while waiting for the async
+    disableBtn();
     uploadBytes(storageRef, icon).then(() => {
       setShowIconModal(false);
       // Make a call for the updated user data
       fetchUserData();
+      // Reactivate the buttons
+      reactivateBtn();
     });
   }
   return (

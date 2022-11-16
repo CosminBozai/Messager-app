@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SignupModal from "./SignupModal";
 import { auth, signInWithEmailAndPassword } from "../../firebase/auth";
 import { useFormik } from "formik";
+import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 import "./Modal.css";
 
 // Custom validation
@@ -31,6 +32,8 @@ export default function LoginModal({ setShowLogin }) {
     },
     validate,
     onSubmit: (values) => {
+      // Disable the buttons while waiting for the async
+      disableBtn();
       signInWithEmailAndPassword(auth, values.email, values.password)
         .then(() => {
           setShowLogin(false);
@@ -41,7 +44,11 @@ export default function LoginModal({ setShowLogin }) {
           } else if (err.code === "auth/wrong-password") {
             alert("Wrong password ");
           }
-        });
+        })
+        .finally(() =>
+          // Reactivate the buttons
+          reactivateBtn()
+        );
     },
   });
   return (

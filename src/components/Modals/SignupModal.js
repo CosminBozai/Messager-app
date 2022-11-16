@@ -1,6 +1,7 @@
 import { firestore, doc, setDoc } from "../../firebase/firestore";
 import { auth, createUserWithEmailAndPassword } from "../../firebase/auth";
 import { useFormik } from "formik";
+import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 
 // Custom validation
 const validate = (values) => {
@@ -32,6 +33,8 @@ export default function SignupModal({ setShowSignup }) {
     },
     validate,
     onSubmit: async (values) => {
+      // Disable the buttons while waiting for the async
+      disableBtn();
       // Create a new account
       const userCred = await createUserWithEmailAndPassword(
         auth,
@@ -43,6 +46,8 @@ export default function SignupModal({ setShowSignup }) {
         username: values.username,
         email: userCred.user.email,
       });
+      // Reactivate the buttons
+      reactivateBtn();
     },
   });
   //

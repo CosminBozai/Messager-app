@@ -3,7 +3,6 @@ import SignupModal from "./SignupModal";
 import { auth, signInWithEmailAndPassword } from "../../firebase/auth";
 import { useFormik } from "formik";
 import "./Modal.css";
-import { findAllByAltText } from "@testing-library/react";
 
 // Custom validation
 const validate = (values) => {
@@ -37,8 +36,11 @@ export default function LoginModal({ setShowLogin }) {
           setShowLogin(false);
         })
         .catch((err) => {
-          if ((err.code = "auth/user-not-found"))
+          if (err.code === "auth/user-not-found") {
             alert("User not found. Try signing up");
+          } else if (err.code === "auth/wrong-password") {
+            alert("Wrong password ");
+          }
         });
     },
   });

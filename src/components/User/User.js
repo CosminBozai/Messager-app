@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import { firestore, doc, getDoc } from "../../firebase/firestore";
 import { auth } from "../../firebase/auth";
 import { storage, ref, getDownloadURL } from "../../firebase/storage";
-import IconModal from "../Modals/IconModal";
+import UserDropdown from "../Dropdowns/UserDropdown";
 
 export default function User() {
   // State that contains the info about the current logged user
   const [userData, setUserData] = useState({});
-  const [showIconModal, setShowIconModal] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const user = auth.currentUser;
   // Get the user data from the database when the component mounts
   async function fetchUserData() {
@@ -35,20 +35,20 @@ export default function User() {
     <>
       {" "}
       <p className="text-sky-600 font-bold">{userData.username}</p>
-      <div className="w-9 h-9 border-2 rounded-full border-zinc-300">
+      <div className="w-9 h-9 border-2 rounded-full border-zinc-300 hover:cursor-pointer">
         {
           <img
             className="w-full h-full rounded-full block"
-            onClick={() => setShowIconModal(true)}
+            onClick={() => setShowDropdown(!showDropdown)}
             id="profile-icon"
             src={userData.iconURL}
             alt="#"
           ></img>
         }
       </div>
-      {showIconModal && (
-        <IconModal
-          setShowIconModal={setShowIconModal}
+      {showDropdown && (
+        <UserDropdown
+          setShowDropdown={setShowDropdown}
           fetchUserData={fetchUserData}
         />
       )}

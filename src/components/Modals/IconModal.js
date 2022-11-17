@@ -5,7 +5,11 @@ import { useRef } from "react";
 import { storage, ref, uploadBytes } from "../../firebase/storage";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 
-export default function IconModal({ setShowIconModal, fetchUserData }) {
+export default function IconModal({
+  setShowIconModal,
+  setShowDropdown,
+  fetchUserData,
+}) {
   const currentIcon = document
     .querySelector("#profile-icon")
     .getAttribute("src");
@@ -29,6 +33,7 @@ export default function IconModal({ setShowIconModal, fetchUserData }) {
     // Disable the buttons while waiting for the async
     disableBtn();
     uploadBytes(storageRef, icon).then(() => {
+      setShowDropdown(false);
       setShowIconModal(false);
       // Make a call for the updated user data
       fetchUserData();

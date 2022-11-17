@@ -52,11 +52,15 @@ export default function SignupModal({ setShowSignup }) {
   });
   //
   return (
-    <div className="modal signup">
-      <form onSubmit={formik.handleSubmit} id="signup-form">
-        <div className="input-field">
+    <div className="absolute inset-0 flex justify-center items-center ">
+      <form
+        className="bg-white py-8 px-7 rounded-lg"
+        onSubmit={formik.handleSubmit}
+      >
+        <div className="flex flex-col mb-3">
           <label htmlFor="username">Username</label>
           <input
+            className="border-2 border-sky-600 rounded-md px-1 invalid:border-red-500 focus:outline-none"
             type="text"
             id="username"
             name="username"
@@ -65,12 +69,13 @@ export default function SignupModal({ setShowSignup }) {
             value={formik.values.username}
           />
           {formik.errors.username && formik.touched.username ? (
-            <div className="error">{formik.errors.username}</div>
+            <div className="text-red-500 text-sm">{formik.errors.username}</div>
           ) : null}
         </div>
-        <div className="input-field">
+        <div className="flex flex-col mb-3">
           <label htmlFor="email">Email address</label>
           <input
+            className="border-2 border-sky-600 rounded-md px-1 invalid:border-red-500 focus:outline-none"
             type="email"
             id="email"
             name="email"
@@ -79,12 +84,13 @@ export default function SignupModal({ setShowSignup }) {
             value={formik.values.email}
           />
           {formik.errors.email && formik.touched.email ? (
-            <div className="error">{formik.errors.email}</div>
+            <div className="text-red-500 text-sm">{formik.errors.email}</div>
           ) : null}
         </div>
-        <div className="input-field">
+        <div className="flex flex-col mb-3">
           <label htmlFor="password">Your password</label>
           <input
+            className="border-2 border-sky-600 rounded-md px-1 invalid:border-red-500 focus:outline-none"
             type="password"
             id="password"
             name="password"
@@ -93,19 +99,19 @@ export default function SignupModal({ setShowSignup }) {
             value={formik.values.password}
           />
           {formik.errors.password && formik.touched.password ? (
-            <div className="error">{formik.errors.password}</div>
+            <div className="text-red-500 text-sm">{formik.errors.password}</div>
           ) : null}
         </div>
         <button
           type="submit"
-          className="form-btn create-acc-btn"
+          className="whitespace-nowrap bg-sky-600 border border-sky-600 mb-2 py-1 px-2 rounded-md w-content text-white hover:bg-white  hover:text-sky-600 active:bg-gray-200 "
           data-testid="modal-create-acc-btn"
         >
           Create account
         </button>
         <button
           type="button"
-          className="form-btn cancel-btn"
+          className="block text-sky-600 hover:underline hover:cursor-pointer"
           data-testid="modal-cancel-btn"
           onClick={() => {
             setShowSignup(false);

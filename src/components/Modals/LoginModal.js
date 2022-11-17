@@ -3,7 +3,6 @@ import SignupModal from "./SignupModal";
 import { auth, signInWithEmailAndPassword } from "../../firebase/auth";
 import { useFormik } from "formik";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
-import "./Modal.css";
 
 // Custom validation
 const validate = (values) => {
@@ -53,11 +52,16 @@ export default function LoginModal({ setShowLogin }) {
   });
   return (
     <>
-      <div className="modal login">
-        <form onSubmit={formik.handleSubmit} id="login-form">
-          <div className="input-field">
+      <div className="absolute inset-0 flex justify-center items-center bg-gray-400/25">
+        <form
+          id="login-form"
+          className="bg-white py-8 px-7 rounded-lg"
+          onSubmit={formik.handleSubmit}
+        >
+          <div className="flex flex-col mb-3">
             <label htmlFor="email">Email address</label>
             <input
+              className="border-2 border-sky-600 rounded-md px-1 invalid:border-red-500 focus:outline-none"
               type="email"
               id="email"
               name="email"
@@ -66,40 +70,47 @@ export default function LoginModal({ setShowLogin }) {
               value={formik.values.email}
             />
             {formik.errors.email && formik.touched.email ? (
-              <div className="error">{formik.errors.email}</div>
+              <div className="text-red-500 text-sm">{formik.errors.email}</div>
             ) : null}
           </div>
-          <div className="input-field">
+          <div className="flex flex-col mb-3">
             <label htmlFor="password">Your password</label>
             <input
+              className="border-2 border-sky-600 rounded-md px-1 invalid:border-red-500 focus:outline-none"
               type="password"
               id="password"
               name="password"
+              minLength={6}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
             />
             {formik.errors.password && formik.touched.password ? (
-              <div className="error">{formik.errors.password}</div>
+              <div className="text-red-500 text-sm">
+                {formik.errors.password}
+              </div>
             ) : null}
           </div>
           <button
             type="submit"
-            className="form-btn login-btn"
-            data-testid="modal-login-btn"
+            className="mb-3 bg-sky-600 border border-sky-600  p-1 rounded-full w-[4.5rem] text-white hover:bg-white  hover:text-sky-600 active:bg-gray-200 "
           >
             Log in
           </button>
           <div>
-            <p>Don't have an account?</p>
+            <p className="inline mr-2">Don't have an account?</p>
             <button
               type="button"
-              className="form-btn "
+              className=" bg-sky-600 border border-sky-600  p-1 rounded-full w-[4.5rem] text-white hover:bg-white  hover:text-sky-600 active:bg-gray-200 "
               onClick={() => setShowSignup(true)}
             >
               Sign up
             </button>
-            <button type="button" onClick={() => setShowLogin(false)}>
+            <button
+              className="block text-sky-600 hover:underline hover:cursor-pointer"
+              type="button"
+              onClick={() => setShowLogin(false)}
+            >
               Cancel
             </button>
           </div>

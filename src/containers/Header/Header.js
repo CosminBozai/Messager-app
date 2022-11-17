@@ -1,6 +1,5 @@
 import User from "../../components/User/User";
 import LoginModal from "../../components/Modals/LoginModal";
-import { auth, signOut } from "../../firebase/auth";
 import { useState } from "react";
 
 export default function Header({ logStatus }) {
@@ -28,9 +27,11 @@ export default function Header({ logStatus }) {
       >
         <h1 id="app-title">MESSENGER</h1>
         <div>
-          <p className="mx-2 text-sky-600 font-bold">You are not logged in</p>
+          <p className="mx-2 text-sky-600 font-bold inline-block">
+            You are not logged in
+          </p>
           <button
-            className="bg-sky-600  p-1 rounded-full w-[4.5rem] text-white hover:bg-white hover:border hover:border-sky-600 hover:text-sky-600 active:bg-gray-200"
+            className="bg-sky-600 border border-sky-600  p-1 rounded-full w-[4.5rem] text-white hover:bg-white  hover:text-sky-600 active:bg-gray-200 "
             onClick={() => setShowLogin(true)}
           >
             Log in

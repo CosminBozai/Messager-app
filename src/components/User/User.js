@@ -38,7 +38,7 @@ export default function User() {
       <div className="w-9 h-9 border-2 rounded-full border-sky-600 hover:cursor-pointer">
         {
           <img
-            className="w-full h-full rounded-full block"
+            className="object-cover w-full h-full rounded-full block"
             onClick={() => setShowDropdown(!showDropdown)}
             id="profile-icon"
             src={userData.iconURL}

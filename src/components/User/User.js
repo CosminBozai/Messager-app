@@ -35,7 +35,7 @@ export default function User() {
     <>
       {" "}
       <p className="text-sky-600 font-bold">{userData.username}</p>
-      <div className="w-9 h-9 border-2 rounded-full border-zinc-300 hover:cursor-pointer">
+      <div className="w-9 h-9 border-2 rounded-full border-sky-600 hover:cursor-pointer">
         {
           <img
             className="w-full h-full rounded-full block"

@@ -23,6 +23,8 @@ const validate = (values) => {
 
 export default function LoginModal({ setShowLogin }) {
   const [showSignup, setShowSignup] = useState(false);
+  // The text that shows when an error was catched
+  const [loginErr, setLoginErr] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -39,9 +41,9 @@ export default function LoginModal({ setShowLogin }) {
         })
         .catch((err) => {
           if (err.code === "auth/user-not-found") {
-            alert("User not found. Try signing up");
+            setLoginErr("User doesn't exist. Try signing up.");
           } else if (err.code === "auth/wrong-password") {
-            alert("Wrong password ");
+            setLoginErr("Wrong password. Try again.");
           }
         })
         .finally(() =>
@@ -58,6 +60,7 @@ export default function LoginModal({ setShowLogin }) {
           className="bg-white py-8 px-7 rounded-lg"
           onSubmit={formik.handleSubmit}
         >
+          <p className="text-red-500 -mt-2">{loginErr}</p>
           <div className="flex flex-col mb-3">
             <label htmlFor="email">Email address</label>
             <input

@@ -2,6 +2,7 @@ import { firestore, doc, setDoc } from "../../firebase/firestore";
 import { auth, createUserWithEmailAndPassword } from "../../firebase/auth";
 import { useFormik } from "formik";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
+import { useState } from "react";
 
 // Custom validation
 const validate = (values) => {
@@ -25,6 +26,8 @@ const validate = (values) => {
 };
 
 export default function SignupModal({ setShowSignup }) {
+  // The text that shows when an error was catched
+  const [signupErr, setSignupErr] = useState("");
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -36,18 +39,25 @@ export default function SignupModal({ setShowSignup }) {
       // Disable the buttons while waiting for the async
       disableBtn();
       // Create a new account
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        values.email,
-        values.password
-      );
-      // Add a new document in collection "Users"
-      await setDoc(doc(firestore, "Users", userCred.user.uid), {
-        username: values.username,
-        email: userCred.user.email,
-      });
-      // Reactivate the buttons
-      reactivateBtn();
+      try {
+        const userCred = await createUserWithEmailAndPassword(
+          auth,
+          values.email,
+          values.password
+        );
+        // Add a new document in collection "Users"
+        await setDoc(doc(firestore, "Users", userCred.user.uid), {
+          username: values.username,
+          email: userCred.user.email,
+        });
+      } catch (err) {
+        if (err.code === "auth/email-already-in-use") {
+          setSignupErr("There is already an account with this email.");
+        }
+      } finally {
+        // Reactivate the buttons
+        reactivateBtn();
+      }
     },
   });
   //
@@ -57,6 +67,7 @@ export default function SignupModal({ setShowSignup }) {
         className="bg-white py-8 px-7 rounded-lg"
         onSubmit={formik.handleSubmit}
       >
+        <p className="text-red-500 -mt-2">{signupErr}</p>
         <div className="flex flex-col mb-3">
           <label htmlFor="username">Username</label>
           <input

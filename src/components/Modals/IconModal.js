@@ -42,13 +42,28 @@ export default function IconModal({
     });
   }
   return (
-    <div className="modal icon">
-      <div className="container">
-        <div className="icon-container">
-          <img src={iconPrev} alt="#" />
+    <div className="fixed inset-0 flex justify-center items-center bg-gray-400/25">
+      <div className="bg-white p-3 rounded-lg">
+        <div className="w-72 mb-6 ">
+          <img
+            className="shadow-md border-1 border-sky-600"
+            src={iconPrev}
+            alt="#"
+          />
         </div>
-        <button onClick={selectIcon}> Select icon </button>
-        <button onClick={uploadImage}>Submit</button>
+        <button
+          className="block whitespace-nowrap bg-sky-600 border border-sky-600 mb-2 py-1 px-2 rounded-md w-content text-white hover:bg-white  hover:text-sky-600 active:bg-gray-200 "
+          onClick={selectIcon}
+        >
+          {" "}
+          Select icon{" "}
+        </button>
+        <button
+          className="block whitespace-nowrap bg-sky-600 border border-sky-600 mb-2 py-1 px-2 rounded-md w-content text-white hover:bg-white  hover:text-sky-600 active:bg-gray-200 "
+          onClick={uploadImage}
+        >
+          Submit
+        </button>
         <input
           onChange={handleChange}
           type="file"
@@ -56,7 +71,12 @@ export default function IconModal({
           ref={inputFile}
           style={{ display: "none" }}
         />
-        <button onClick={() => setShowIconModal(false)}>Cancel</button>
+        <button
+          className="block text-sky-600 hover:underline hover:cursor-pointer"
+          onClick={() => setShowIconModal(false)}
+        >
+          Cancel
+        </button>
       </div>
     </div>
   );

@@ -14,15 +14,7 @@ export default function Header({ logStatus }) {
           className="h-14 w-full flex justify-between items-center px-4 bg-white shadow "
         >
           <h1 id="app-title">MESSENGER</h1>
-          <div className="flex justify-between items-center gap-2">
-            <button
-              className="bg-sky-600  p-1 rounded-full w-[4.5rem] text-white hover:bg-white hover:border hover:border-sky-600 hover:text-sky-600 active:bg-gray-200"
-              onClick={async () => {
-                await signOut(auth);
-              }}
-            >
-              Sign out
-            </button>
+          <div className="flex justify-between items-center gap-2 relative">
             <User />
           </div>
         </div>

@@ -3,7 +3,6 @@ import { firestore, doc, getDoc } from "../../firebase/firestore";
 import { auth } from "../../firebase/auth";
 import { storage, ref, getDownloadURL } from "../../firebase/storage";
 import IconModal from "../Modals/IconModal";
-import "./User.css";
 
 export default function User() {
   // State that contains the info about the current logged user
@@ -35,14 +34,17 @@ export default function User() {
   return (
     <>
       {" "}
-      <p className="username">{userData.username}</p>
-      <div data-testid="profile-icon" className="user-icon">
-        <img
-          onClick={() => setShowIconModal(true)}
-          id="profile-icon"
-          src={userData.iconURL}
-          alt="#"
-        ></img>
+      <p className="text-sky-600 font-bold">{userData.username}</p>
+      <div className="w-9 h-9 border-2 rounded-full border-zinc-300">
+        {
+          <img
+            className="w-full h-full rounded-full block"
+            onClick={() => setShowIconModal(true)}
+            id="profile-icon"
+            src={userData.iconURL}
+            alt="#"
+          ></img>
+        }
       </div>
       {showIconModal && (
         <IconModal

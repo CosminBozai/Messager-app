@@ -12,7 +12,7 @@ export default function Header() {
       <>
         <div
           id="header"
-          className="h-14 w-full flex justify-between items-center px-4 bg-white shadow "
+          className="h-[10%] w-full flex justify-between items-center px-4 bg-white shadow "
         >
           <h1 id="app-title">MESSENGER</h1>
           <div className="flex justify-between items-center gap-2 relative">

@@ -9,7 +9,7 @@ import { logStatusAtom } from "./atoms/atoms";
 
 function App() {
   // logStatus is passed as a prop to the components to condiotionally render things
-  const [, setLogStatus] = useAtom(logStatusAtom);
+  const [logStatus, setLogStatus] = useAtom(logStatusAtom);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -25,8 +25,12 @@ function App() {
       className="bg-white w-9/12 h-[70%] rounded-md shadow-md"
     >
       <Header />
-      <FriendList />
-      <ChatContainer />
+      {logStatus ? (
+        <>
+          <FriendList />
+          <ChatContainer />
+        </>
+      ) : null}
     </div>
   );
 }

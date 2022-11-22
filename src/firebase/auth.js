@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 const auth = getAuth(app);
@@ -14,4 +15,5 @@ export {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  updateProfile,
 };

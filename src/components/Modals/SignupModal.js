@@ -1,13 +1,13 @@
-import { firestore, doc, setDoc } from "../../firebase/firestore";
-import { auth, createUserWithEmailAndPassword } from "../../firebase/auth";
+import {
+  auth,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "../../firebase/auth";
 import { useFormik } from "formik";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { showLoginModalAtom, showSignupModalAtom } from "../../atoms/atoms";
-import { storage, ref, uploadBytes } from "../../firebase/storage";
-import dataURLtoFile from "../../utils/ImgToFile";
-import { data } from "autoprefixer";
 
 // Custom validation
 const validate = (values) => {
@@ -47,21 +47,18 @@ export default function SignupModal() {
       disableBtn();
       // Create a new account
       try {
-        const userCred = await createUserWithEmailAndPassword(
+        await createUserWithEmailAndPassword(
           auth,
           values.email,
           values.password
         );
-        // Add a new document in collection "Users"
-        await setDoc(doc(firestore, "Users", userCred.user.uid), {
-          username: values.username,
-          email: userCred.user.email,
+        const user = auth.currentUser;
+        // Add username, and default profile icon
+        await updateProfile(user, {
+          displayName: values.username,
+          photoURL:
+            "https://firebasestorage.googleapis.com/v0/b/messager-app-c6790.appspot.com/o/default.jpg?alt=media&token=0859e0fd-3fc4-48e2-9c68-df452e217522",
         });
-        // Add a default profile pic in storage
-        const storageRef = ref(storage, `${userCred.user.uid}/icon`);
-        const file = dataURLtoFile("icon");
-        await uploadBytes(storageRef, file);
-
         setShowLogin(false);
       } catch (err) {
         if (err.code === "auth/email-already-in-use") {

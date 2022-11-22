@@ -1,15 +1,19 @@
 import React from "react";
 import { useState } from "react";
-import { auth } from "../../firebase/auth";
+import { auth, updateProfile } from "../../firebase/auth";
 import { useRef } from "react";
-import { storage, ref, uploadBytes } from "../../firebase/storage";
-import { disableBtn, reactivateBtn } from "../../utils/buttonController";
+import {
+  storage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+} from "../../firebase/storage";
+import { disableBtn } from "../../utils/buttonController";
 import { useAtom } from "jotai";
-import { iconModalAtom, dropdownAtom } from "../../atoms/atoms";
+import { iconModalAtom } from "../../atoms/atoms";
 
-export default function IconModal({ fetchUserData }) {
+export default function IconModal() {
   const [, setShowIconModal] = useAtom(iconModalAtom);
-  const [, setShowDropdown] = useAtom(dropdownAtom);
   const currentIcon = document
     .querySelector("#profile-icon")
     .getAttribute("src");
@@ -21,11 +25,13 @@ export default function IconModal({ fetchUserData }) {
     // `current` points to the mounted file input element
     inputFile.current.click();
   }
+
   // Display preview of the new icon
   function handleChange(e) {
     setIconPrev(URL.createObjectURL(e.target.files[0]));
     setIcon(e.target.files[0]);
   }
+
   // Upload the image to the storage belonging to the current user
   function uploadImage() {
     if (icon === null || icon === undefined) return;
@@ -33,12 +39,16 @@ export default function IconModal({ fetchUserData }) {
     // Disable the buttons while waiting for the async
     disableBtn();
     uploadBytes(storageRef, icon).then(() => {
-      setShowDropdown(false);
-      setShowIconModal(false);
-      // Make a call for the updated user data
-      fetchUserData();
-      // Reactivate the buttons
-      reactivateBtn();
+      // Get the url for the new icon
+      getDownloadURL(storageRef)
+        .then((url) => {
+          updateProfile(user, {
+            photoURL: url,
+          });
+        })
+        .then(() => {
+          window.location.reload();
+        });
     });
   }
   return (

@@ -3,7 +3,7 @@ import { auth, signOut } from "../../firebase/auth";
 import { useAtom } from "jotai";
 import { iconModalAtom } from "../../atoms/atoms";
 
-export default function UserDropdown({ fetchUserData }) {
+export default function UserDropdown() {
   const [showIconModal, setShowIconModal] = useAtom(iconModalAtom);
   return (
     <div
@@ -27,7 +27,7 @@ export default function UserDropdown({ fetchUserData }) {
           Sign out
         </span>
       </div>
-      {showIconModal && <IconModal fetchUserData={fetchUserData} />}
+      {showIconModal && <IconModal />}
     </div>
   );
 }

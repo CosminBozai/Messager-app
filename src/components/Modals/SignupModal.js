@@ -5,6 +5,9 @@ import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 import { useState } from "react";
 import { useAtom } from "jotai";
 import { showLoginModalAtom, showSignupModalAtom } from "../../atoms/atoms";
+import { storage, ref, uploadBytes } from "../../firebase/storage";
+import dataURLtoFile from "../../utils/ImgToFile";
+import { data } from "autoprefixer";
 
 // Custom validation
 const validate = (values) => {
@@ -54,6 +57,11 @@ export default function SignupModal() {
           username: values.username,
           email: userCred.user.email,
         });
+        // Add a default profile pic in storage
+        const storageRef = ref(storage, `${userCred.user.uid}/icon`);
+        const file = dataURLtoFile("icon");
+        await uploadBytes(storageRef, file);
+
         setShowLogin(false);
       } catch (err) {
         if (err.code === "auth/email-already-in-use") {

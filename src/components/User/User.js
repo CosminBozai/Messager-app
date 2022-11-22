@@ -15,18 +15,8 @@ export default function User() {
   async function fetchUserData() {
     const docSnap = await getDoc(doc(firestore, "Users", user.uid));
     const username = docSnap.data().username;
-    let iconURL;
-    try {
-      // User has a custom icon
-      iconURL = await getDownloadURL(ref(storage, `${user.uid}/icon`));
-    } catch (err) {
-      // User has the default icon
-      if (err.code === "storage/object-not-found") {
-        iconURL = await getDownloadURL(ref(storage, "default.jpg"));
-      }
-    } finally {
-      setUserData({ username, iconURL });
-    }
+    const iconURL = await getDownloadURL(ref(storage, `${user.uid}/icon`));
+    setUserData({ username, iconURL });
   }
 
   useEffect(() => {

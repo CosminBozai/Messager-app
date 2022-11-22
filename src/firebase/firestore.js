@@ -6,9 +6,23 @@ import {
   addDoc,
   setDoc,
   getDoc,
+  getDocs,
   updateDoc,
+  query,
+  where,
 } from "firebase/firestore";
 
 const firestore = getFirestore(app);
 
-export { firestore, collection, doc, addDoc, setDoc, getDoc, updateDoc };
+export {
+  firestore,
+  collection,
+  doc,
+  addDoc,
+  setDoc,
+  getDoc,
+  getDocs,
+  updateDoc,
+  query,
+  where,
+};

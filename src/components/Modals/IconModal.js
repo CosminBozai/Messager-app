@@ -8,6 +8,7 @@ import {
   uploadBytes,
   getDownloadURL,
 } from "../../firebase/storage";
+import { firestore, doc, updateDoc } from "../../firebase/firestore";
 import { disableBtn } from "../../utils/buttonController";
 import { useAtom } from "jotai";
 import { iconModalAtom } from "../../atoms/atoms";
@@ -40,15 +41,16 @@ export default function IconModal() {
     disableBtn();
     uploadBytes(storageRef, icon).then(() => {
       // Get the url for the new icon
-      getDownloadURL(storageRef)
-        .then((url) => {
-          updateProfile(user, {
-            photoURL: url,
-          });
-        })
-        .then(() => {
+      getDownloadURL(storageRef).then((url) => {
+        updateProfile(user, {
+          photoURL: url,
+        });
+        updateDoc(doc(firestore, "users", user.uid), {
+          icon: url,
+        }).then(() => {
           window.location.reload();
         });
+      });
     });
   }
   return (

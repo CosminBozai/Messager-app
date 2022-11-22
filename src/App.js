@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import Header from "./containers/Header/Header";
 import FriendList from "./containers/FriendList";
 import ChatContainer from "./containers/ChatContainer";
 import { auth, onAuthStateChanged } from "./firebase/auth";
+import { useAtom } from "jotai";
+import { logStatusAtom } from "./atoms/atoms";
 
 function App() {
   // logStatus is passed as a prop to the components to condiotionally render things
-  const [logStatus, setLogStatus] = useState(false);
+  const [, setLogStatus] = useAtom(logStatusAtom);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -22,7 +24,7 @@ function App() {
       id="app-container"
       className="bg-white w-9/12 h-[70%] rounded-md shadow-md"
     >
-      <Header logStatus={logStatus} setLogStatus={setLogStatus} />
+      <Header />
       <FriendList />
       <ChatContainer />
     </div>

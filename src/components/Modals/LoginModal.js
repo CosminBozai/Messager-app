@@ -3,6 +3,8 @@ import SignupModal from "./SignupModal";
 import { auth, signInWithEmailAndPassword } from "../../firebase/auth";
 import { useFormik } from "formik";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
+import { useAtom } from "jotai";
+import { showLoginModalAtom, showSignupModalAtom } from "../../atoms/atoms";
 
 // Custom validation
 const validate = (values) => {
@@ -21,8 +23,9 @@ const validate = (values) => {
   return errors;
 };
 
-export default function LoginModal({ setShowLogin }) {
-  const [showSignup, setShowSignup] = useState(false);
+export default function LoginModal() {
+  const [, setShowLogin] = useAtom(showLoginModalAtom);
+  const [showSignup, setShowSignup] = useAtom(showSignupModalAtom);
   // The text that shows when an error was catched
   const [loginErr, setLoginErr] = useState("");
 
@@ -119,7 +122,7 @@ export default function LoginModal({ setShowLogin }) {
           </div>
         </form>
       </div>
-      {showSignup && <SignupModal setShowSignup={setShowSignup} />}
+      {showSignup && <SignupModal />}
     </>
   );
 }

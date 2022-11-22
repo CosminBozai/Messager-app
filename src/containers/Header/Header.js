@@ -1,10 +1,12 @@
 import User from "../../components/User/User";
 import LoginModal from "../../components/Modals/LoginModal";
-import { useState } from "react";
+import { useAtom } from "jotai";
+import { logStatusAtom, showLoginModalAtom } from "../../atoms/atoms";
 
-export default function Header({ logStatus }) {
+export default function Header() {
   // Display the login modal based on the state
-  const [showLogin, setShowLogin] = useState(false);
+  const [showLogin, setShowLogin] = useAtom(showLoginModalAtom);
+  const [logStatus] = useAtom(logStatusAtom);
   if (logStatus) {
     return (
       <>
@@ -38,7 +40,7 @@ export default function Header({ logStatus }) {
           </button>
         </div>
 
-        {showLogin && <LoginModal setShowLogin={setShowLogin} />}
+        {showLogin && <LoginModal />}
       </div>
     );
   }

@@ -3,11 +3,13 @@ import { firestore, doc, getDoc } from "../../firebase/firestore";
 import { auth } from "../../firebase/auth";
 import { storage, ref, getDownloadURL } from "../../firebase/storage";
 import UserDropdown from "../Dropdowns/UserDropdown";
+import { useAtom } from "jotai";
+import { dropdownAtom } from "../../atoms/atoms";
 
 export default function User() {
   // State that contains the info about the current logged user
   const [userData, setUserData] = useState({});
-  const [showDropdown, setShowDropdown] = useState(false);
+  const [showDropdown, setShowDropdown] = useAtom(dropdownAtom);
   const user = auth.currentUser;
   // Get the user data from the database when the component mounts
   async function fetchUserData() {
@@ -46,12 +48,7 @@ export default function User() {
           ></img>
         }
       </div>
-      {showDropdown && (
-        <UserDropdown
-          setShowDropdown={setShowDropdown}
-          fetchUserData={fetchUserData}
-        />
-      )}
+      {showDropdown && <UserDropdown fetchUserData={fetchUserData} />}
     </>
   );
 }

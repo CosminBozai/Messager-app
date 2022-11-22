@@ -4,12 +4,12 @@ import { auth } from "../../firebase/auth";
 import { useRef } from "react";
 import { storage, ref, uploadBytes } from "../../firebase/storage";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
+import { useAtom } from "jotai";
+import { iconModalAtom, dropdownAtom } from "../../atoms/atoms";
 
-export default function IconModal({
-  setShowIconModal,
-  setShowDropdown,
-  fetchUserData,
-}) {
+export default function IconModal({ fetchUserData }) {
+  const [, setShowIconModal] = useAtom(iconModalAtom);
+  const [, setShowDropdown] = useAtom(dropdownAtom);
   const currentIcon = document
     .querySelector("#profile-icon")
     .getAttribute("src");

@@ -3,6 +3,8 @@ import { auth, createUserWithEmailAndPassword } from "../../firebase/auth";
 import { useFormik } from "formik";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 import { useState } from "react";
+import { useAtom } from "jotai";
+import { showLoginModalAtom, showSignupModalAtom } from "../../atoms/atoms";
 
 // Custom validation
 const validate = (values) => {
@@ -25,7 +27,9 @@ const validate = (values) => {
   return errors;
 };
 
-export default function SignupModal({ setShowSignup }) {
+export default function SignupModal() {
+  const [, setShowLogin] = useAtom(showLoginModalAtom);
+  const [, setShowSignup] = useAtom(showSignupModalAtom);
   // The text that shows when an error was catched
   const [signupErr, setSignupErr] = useState("");
   const formik = useFormik({
@@ -50,6 +54,7 @@ export default function SignupModal({ setShowSignup }) {
           username: values.username,
           email: userCred.user.email,
         });
+        setShowLogin(false);
       } catch (err) {
         if (err.code === "auth/email-already-in-use") {
           setSignupErr("There is already an account with this email.");

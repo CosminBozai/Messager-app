@@ -1,9 +1,10 @@
-import { useState } from "react";
 import IconModal from "../Modals/IconModal";
 import { auth, signOut } from "../../firebase/auth";
+import { useAtom } from "jotai";
+import { iconModalAtom } from "../../atoms/atoms";
 
-export default function UserDropdown({ fetchUserData, setShowDropdown }) {
-  const [showIconModal, setShowIconModal] = useState(false);
+export default function UserDropdown({ fetchUserData }) {
+  const [showIconModal, setShowIconModal] = useAtom(iconModalAtom);
   return (
     <div
       id="user-dropdown"
@@ -26,13 +27,7 @@ export default function UserDropdown({ fetchUserData, setShowDropdown }) {
           Sign out
         </span>
       </div>
-      {showIconModal && (
-        <IconModal
-          setShowDropdown={setShowDropdown}
-          setShowIconModal={setShowIconModal}
-          fetchUserData={fetchUserData}
-        />
-      )}
+      {showIconModal && <IconModal fetchUserData={fetchUserData} />}
     </div>
   );
 }

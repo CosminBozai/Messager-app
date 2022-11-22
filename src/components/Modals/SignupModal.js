@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   updateProfile,
 } from "../../firebase/auth";
+import { firestore, doc, setDoc } from "../../firebase/firestore";
 import { useFormik } from "formik";
 import { disableBtn, reactivateBtn } from "../../utils/buttonController";
 import { useState } from "react";
@@ -59,13 +60,19 @@ export default function SignupModal() {
           photoURL:
             "https://firebasestorage.googleapis.com/v0/b/messager-app-c6790.appspot.com/o/default.jpg?alt=media&token=0859e0fd-3fc4-48e2-9c68-df452e217522",
         });
-        setShowLogin(false);
+        // Save data in firestore to be used by other containers
+        await setDoc(doc(firestore, "users", user.uid), {
+          username: user.displayName,
+          icon: user.photoURL,
+        });
       } catch (err) {
         if (err.code === "auth/email-already-in-use") {
           setSignupErr("There is already an account with this email.");
         }
       } finally {
         // Reactivate the buttons
+        setShowSignup(false);
+        setShowLogin(false);
         reactivateBtn();
       }
     },

@@ -9,7 +9,9 @@ export default function User() {
   return (
     <>
       {" "}
-      <p className="text-sky-600 font-bold">{user.displayName}</p>
+      <p className="text-sky-600 text-lg font-bold tracking-wide">
+        {user.displayName}
+      </p>
       <div className="w-9 h-9 border-2 rounded-full border-sky-600 hover:cursor-pointer">
         {
           <img

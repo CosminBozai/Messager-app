@@ -22,7 +22,7 @@ function App() {
   return (
     <div
       id="app-container"
-      className="bg-white w-9/12 h-[70%] rounded-md shadow-md"
+      className="bg-white w-8/12 h-[70%] rounded-md shadow-md"
     >
       <Header />
       {logStatus ? (

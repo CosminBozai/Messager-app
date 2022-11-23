@@ -13,9 +13,9 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        setLogStatus(true);
+        setLogStatus(() => true);
       } else {
-        setLogStatus(false);
+        setLogStatus(() => false);
       }
     });
   });

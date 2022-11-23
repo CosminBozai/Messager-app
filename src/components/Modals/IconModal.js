@@ -29,8 +29,8 @@ export default function IconModal() {
 
   // Display preview of the new icon
   function handleChange(e) {
-    setIconPrev(URL.createObjectURL(e.target.files[0]));
-    setIcon(e.target.files[0]);
+    setIconPrev(() => URL.createObjectURL(e.target.files[0]));
+    setIcon(() => e.target.files[0]);
   }
 
   // Upload the image to the storage belonging to the current user

@@ -40,7 +40,7 @@ export default function LoginModal() {
       disableBtn();
       signInWithEmailAndPassword(auth, values.email, values.password)
         .then(() => {
-          setShowLogin(false);
+          setShowLogin(() => false);
         })
         .catch((err) => {
           if (err.code === "auth/user-not-found") {

@@ -28,7 +28,10 @@ export default function FriendList() {
   }, []);
 
   return (
-    <ul className="w-64 h-[90%] bg-gray-100 border-2" id="friend-list">
+    <ul
+      className="w-80 h-[90%] p-2 bg-gray-50 border-2 overflow-scroll"
+      id="friend-list"
+    >
       {friends.map((friend, i) => {
         return (
           <UserCard key={i} username={friend.username} icon={friend.icon} />

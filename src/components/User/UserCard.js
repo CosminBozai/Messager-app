@@ -1,14 +1,29 @@
 import React from "react";
 
 export default function UserCard({ username, icon }) {
+  function addFocus(e) {
+    console.log(e.target);
+    e.target.closest("li").focus();
+  }
   return (
-    <li className="h-16 w-full border border-black">
+    <li
+      className="group/friend h-16 w-full flex items-center gap-3 px-2 rounded-md transition-all hover:bg-neutral-200 hover:cursor-pointer focus:bg-sky-600"
+      tabindex="0"
+      onClick={addFocus}
+    >
       <img
-        className="inline-block h-8 w-8 rounded-full"
+        className="inline-block h-9 w-9 border-2 border-sky-600 rounded-full"
         src={icon}
         alt="#"
       ></img>
-      <p className="inline">{username}</p>
+      <div>
+        <p className="group-focus/friend:text-white text-lg tracking-wide">
+          {username}
+        </p>
+        <p className="group-focus/friend:text-zinc-100 text-sm font-medium text-zinc-400">
+          placeholder text blablabla
+        </p>
+      </div>
     </li>
   );
 }

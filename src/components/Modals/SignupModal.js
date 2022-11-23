@@ -64,6 +64,7 @@ export default function SignupModal() {
         await setDoc(doc(firestore, "users", user.uid), {
           username: user.displayName,
           icon: user.photoURL,
+          uid: user.uid,
         });
       } catch (err) {
         if (err.code === "auth/email-already-in-use") {

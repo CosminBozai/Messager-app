@@ -4,6 +4,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Bangers&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Khojki:wght@400;500;600;700&display=swap");
 
+/* hide scrollbar but allow scrolling */
+#friend-list {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+}
+
+#friend-list::-webkit-scrollbar {
+  display: none; /* for Chrome, Safari, and Opera */
+}
+
 #root {
   width: 100vw;
   height: 100vh;

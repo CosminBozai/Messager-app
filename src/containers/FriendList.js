@@ -29,7 +29,7 @@ export default function FriendList() {
 
   return (
     <ul
-      className="w-80 h-[90%] p-2 bg-gray-50 border-2 overflow-scroll"
+      className="w-20 lg:w-72 h-[90%] py-2 lg:p-2 bg-gray-50 border-2 overflow-scroll"
       id="friend-list"
     >
       {friends.map((friend, i) => {

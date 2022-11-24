@@ -7,8 +7,8 @@ export default function UserCard({ username, icon }) {
   }
   return (
     <li
-      className="group/friend h-16 w-full flex items-center gap-3 px-2 rounded-md transition-all hover:bg-neutral-200 hover:cursor-pointer focus:bg-sky-600"
-      tabindex="0"
+      className="group/friend h-16 w-full flex items-center justify-center lg:gap-3 px-2 rounded-md transition-all hover:bg-neutral-200 hover:cursor-pointer focus:bg-sky-600"
+      tabIndex="0"
       onClick={addFocus}
     >
       <img
@@ -17,10 +17,10 @@ export default function UserCard({ username, icon }) {
         alt="#"
       ></img>
       <div>
-        <p className="group-focus/friend:text-white text-lg tracking-wide">
+        <p className="hidden lg:inline-block group-focus/friend:text-white text-lg tracking-wide">
           {username}
         </p>
-        <p className="group-focus/friend:text-zinc-100 text-sm font-medium text-zinc-400">
+        <p className="hidden lg:inline-block group-focus/friend:text-zinc-100 text-sm font-medium text-zinc-400">
           placeholder text blablabla
         </p>
       </div>

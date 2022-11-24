@@ -11,16 +11,16 @@ import {
 import { firestore, doc, updateDoc } from "../../firebase/firestore";
 import { disableBtn } from "../../utils/buttonController";
 import { useAtom } from "jotai";
-import { iconModalAtom } from "../../atoms/atoms";
+import { iconModalAtom, userAtom } from "../../atoms/atoms";
 
 export default function IconModal() {
+  const [user] = useAtom(userAtom);
   const [, setShowIconModal] = useAtom(iconModalAtom);
   const currentIcon = document
     .querySelector("#profile-icon")
     .getAttribute("src");
   const [iconPrev, setIconPrev] = useState(currentIcon);
   const [icon, setIcon] = useState(null);
-  const user = auth.currentUser;
   const inputFile = useRef(null);
   function selectIcon() {
     // `current` points to the mounted file input element

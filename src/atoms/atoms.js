@@ -4,3 +4,4 @@ export const logStatusAtom = atom(false);
 export const showLoginModalAtom = atom(false);
 export const showSignupModalAtom = atom(false);
 export const iconModalAtom = atom(false);
+export const userAtom = atom(null);

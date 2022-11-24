@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { auth } from "../../firebase/auth";
 import UserDropdown from "../Dropdowns/UserDropdown";
+import { useAtom } from "jotai";
+import { userAtom } from "../../atoms/atoms";
 
 export default function User() {
+  const [user] = useAtom(userAtom);
   const [showDropdown, setShowDropdown] = useState(false);
-  const user = auth.currentUser;
-
   return (
     <>
       {" "}

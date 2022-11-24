@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function UserCard({ username, icon }) {
+export default function UserCard({ uid, username, icon }) {
   function addFocus(e) {
     console.log(e.target);
     e.target.closest("li").focus();

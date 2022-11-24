@@ -1,6 +1,5 @@
 import UserCard from "../components/User/UserCard";
 import React, { useEffect, useState } from "react";
-import { auth, onAuthStateChanged } from "../firebase/auth";
 import {
   firestore,
   collection,
@@ -8,24 +7,23 @@ import {
   where,
   getDocs,
 } from "../firebase/firestore";
+import { useAtom } from "jotai";
+import { userAtom } from "../atoms/atoms";
 
 export default function FriendList() {
+  const [user] = useAtom(userAtom);
   const [friends, setFriends] = useState([]);
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const q = query(
-          collection(firestore, "users"),
-          where("uid", "!=", user.uid)
-        );
-        getDocs(q).then((querySnap) => {
-          querySnap.forEach((doc) => {
-            setFriends((current) => [...current, doc.data()]);
-          });
-        });
-      } else return;
+    const q = query(
+      collection(firestore, "users"),
+      where("uid", "!=", user.uid)
+    );
+    getDocs(q).then((querySnap) => {
+      querySnap.forEach((doc) => {
+        setFriends((current) => [...current, doc.data()]);
+      });
     });
-  }, []);
+  }, [user]);
 
   return (
     <ul
@@ -34,7 +32,12 @@ export default function FriendList() {
     >
       {friends.map((friend, i) => {
         return (
-          <UserCard key={i} username={friend.username} icon={friend.icon} />
+          <UserCard
+            key={i}
+            uid={friend.uid}
+            username={friend.username}
+            icon={friend.icon}
+          />
         );
       })}
     </ul>

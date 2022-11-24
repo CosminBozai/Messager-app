@@ -1,7 +1,7 @@
-import User from "../../components/User/User";
-import LoginModal from "../../components/Modals/LoginModal";
+import User from "../components/User/User";
+import LoginModal from "../components/Modals/LoginModal";
 import { useAtom } from "jotai";
-import { logStatusAtom, showLoginModalAtom } from "../../atoms/atoms";
+import { logStatusAtom, showLoginModalAtom } from "../atoms/atoms";
 
 export default function Header() {
   // Display the login modal based on the state

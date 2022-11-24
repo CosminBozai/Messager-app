@@ -25,12 +25,14 @@ function App() {
       className="bg-white w-8/12 h-[70%] rounded-md shadow-md"
     >
       <Header />
-      {logStatus ? (
-        <>
-          <FriendList />
-          <ChatContainer />
-        </>
-      ) : null}
+      <div className="flex h-[90%] w-full">
+        {logStatus ? (
+          <>
+            <FriendList />
+            <ChatContainer />
+          </>
+        ) : null}
+      </div>
     </div>
   );
 }

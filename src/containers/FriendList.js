@@ -14,20 +14,23 @@ export default function FriendList() {
   const [user] = useAtom(userAtom);
   const [friends, setFriends] = useState([]);
   useEffect(() => {
-    const q = query(
-      collection(firestore, "users"),
-      where("uid", "!=", user.uid)
-    );
-    getDocs(q).then((querySnap) => {
+    async function getFriends() {
+      const userQuery = query(
+        collection(firestore, "users"),
+        where("uid", "!=", user.uid)
+      );
+      const querySnap = await getDocs(userQuery);
       querySnap.forEach((doc) => {
-        setFriends((current) => [...current, doc.data()]);
+        setFriends((prev) => [...prev, doc.data()]);
       });
-    });
+    }
+
+    getFriends();
   }, [user]);
 
   return (
     <ul
-      className="w-20 lg:w-64 h-full py-2 lg:p-2 bg-gray-50 border-2 overflow-scroll"
+      className="w-20 lg:w-40 h-full py-2 lg:p-2 bg-gray-50 border-2 overflow-scroll"
       id="friend-list"
     >
       {friends.map((friend, i) => {

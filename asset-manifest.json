@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Messager-app/static/css/main.a1ab2112.css",
+    "main.js": "/Messager-app/static/js/main.597fe673.js",
+    "index.html": "/Messager-app/index.html",
+    "main.a1ab2112.css.map": "/Messager-app/static/css/main.a1ab2112.css.map",
+    "main.597fe673.js.map": "/Messager-app/static/js/main.597fe673.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a1ab2112.css",
+    "static/js/main.597fe673.js"
+  ]
+}

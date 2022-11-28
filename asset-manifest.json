@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/Messager-app/static/css/main.a1ab2112.css",
-    "main.js": "/Messager-app/static/js/main.597fe673.js",
+    "main.css": "/Messager-app/static/css/main.e8a07aa7.css",
+    "main.js": "/Messager-app/static/js/main.75b129f1.js",
     "index.html": "/Messager-app/index.html",
-    "main.a1ab2112.css.map": "/Messager-app/static/css/main.a1ab2112.css.map",
-    "main.597fe673.js.map": "/Messager-app/static/js/main.597fe673.js.map"
+    "main.e8a07aa7.css.map": "/Messager-app/static/css/main.e8a07aa7.css.map",
+    "main.75b129f1.js.map": "/Messager-app/static/js/main.75b129f1.js.map"
   },
   "entrypoints": [
-    "static/css/main.a1ab2112.css",
-    "static/js/main.597fe673.js"
+    "static/css/main.e8a07aa7.css",
+    "static/js/main.75b129f1.js"
   ]
 }

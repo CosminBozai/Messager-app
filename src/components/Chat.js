@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useAtom } from "jotai";
-import { userAtom, activeFriendAtom, msgDocAtom } from "../atoms/atoms";
+import { activeFriendAtom, msgDocAtom } from "../atoms/atoms";
 
 export default function Chat() {
-  const [user] = useAtom(userAtom);
   const [activeFriend] = useAtom(activeFriendAtom);
   const [msgDoc] = useAtom(msgDocAtom);
   const [messages, setMessages] = useState([]);
   useEffect(() => {
     if (msgDoc !== activeFriend.username) {
+      setMessages(() => []);
       setMessages((prev) => prev.concat(msgDoc));
     } else {
+      setMessages(() => []);
       setMessages((prev) => [
         ...prev,
         {

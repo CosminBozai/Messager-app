@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import {
   doc,
   firestore,
@@ -42,7 +42,6 @@ export default function Input() {
 
     inputMsgRef.current.value = "";
   }
-  useEffect(() => {});
   return (
     <>
       <input

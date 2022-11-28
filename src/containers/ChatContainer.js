@@ -1,7 +1,7 @@
 import Chat from "../components/Chat";
 import Input from "../components/Input";
 import React, { useEffect } from "react";
-import { firestore, doc, getDoc } from "../firebase/firestore";
+import { firestore, doc, onSnapshot } from "../firebase/firestore";
 import { useAtom } from "jotai";
 import { userAtom, activeFriendAtom, msgDocAtom } from "../atoms/atoms";
 
@@ -16,14 +16,16 @@ export default function ChatContainer() {
       //... in alphabetical order
       let userArr = [user.uid, activeFriend.uid].sort();
       const docRef = doc(firestore, "messages", userArr.join("-"));
-      const docSnap = await getDoc(docRef);
-      if (docSnap.exists()) {
-        setMsgDoc(() => docSnap.data().messages);
-      } else {
-        // Done this to rerender the chat after switching between 2 friends with no doc...
-        // Otherwise msgDoc will return null for both and "no message" won't display
-        setMsgDoc(() => activeFriend.username);
-      }
+      // Listen for new messages
+      onSnapshot(docRef, (docSnap) => {
+        if (docSnap.exists()) {
+          setMsgDoc(() => docSnap.data().messages);
+        } else {
+          // Done this to rerender the chat after switching between 2 friends with no doc...
+          // Otherwise msgDoc will return null for both and "no message" won't display
+          setMsgDoc(() => activeFriend.username);
+        }
+      });
     }
     getMsgDoc();
   }, [activeFriend]);

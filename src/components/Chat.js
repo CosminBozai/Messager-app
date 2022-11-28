@@ -21,7 +21,8 @@ export default function Chat() {
         },
       ]);
     }
-  }, [msgDoc]);
+    return () => setMessages(() => []);
+  }, [msgDoc, activeFriend]);
   // This cleans the chat of the previous friend's messages
   useEffect(() => {
     return setMessages(() => []);

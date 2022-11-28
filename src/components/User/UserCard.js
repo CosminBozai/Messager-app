@@ -7,7 +7,7 @@ export default function UserCard({ uid, username, icon }) {
   const [activeFriend, setActiveFriend] = useAtom(activeFriendAtom);
   function handleClick() {
     if (activeFriend.uid === uid) return;
-    setActiveFriend((prev) => ({ ...prev, uid, username }));
+    setActiveFriend(() => ({ uid, username }));
     setFocused(() => uid);
   }
   return (

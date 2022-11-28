@@ -43,19 +43,19 @@ export default function Input() {
     inputMsgRef.current.value = "";
   }
   return (
-    <>
+    <div>
       <input
-        className="w-80 h-10 border border-black"
+        className="w-80 h-10 px-2 border border-black border-box outline-none"
         type="text"
         ref={inputMsgRef}
       ></input>
       <button
-        className="bg-sky-600 p-2 text-white"
+        className="bg-sky-600 h-10 px-2 text-white active:bg-sky-900"
         type="button"
         onClick={sendMessage}
       >
         Send
       </button>
-    </>
+    </div>
   );
 }

@@ -28,7 +28,7 @@ export default function Chat() {
     return setMessages(() => []);
   }, [activeFriend]);
   return (
-    <div className="h-5/6 ">
+    <div className="h-5/6 overflow-scroll px-3 py-2" id="chat">
       {messages.map((msg, i) => {
         if (msg.sender === user.uid) {
           return (

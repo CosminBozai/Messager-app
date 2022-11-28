@@ -32,7 +32,7 @@ export default function ChatContainer() {
     return <div className="flex-auto" id="chat-container"></div>;
   } else {
     return (
-      <div className="flex-auto pt-3 px-2" id="chat-container">
+      <div className="flex-auto" id="chat-container">
         <Chat />
         <div className="h-1/6 flex items-center justify-around border-t-2 shadow-md">
           <Input />

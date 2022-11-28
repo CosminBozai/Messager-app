@@ -5,13 +5,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif+Khojki:wght@400;500;600;700&display=swap");
 
 /* hide scrollbar but allow scrolling */
-#friend-list {
+#friend-list,
+#chat {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
   overflow-y: scroll;
 }
 
-#friend-list::-webkit-scrollbar {
+#friend-list::-webkit-scrollbar,
+#chat::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
 }
 
